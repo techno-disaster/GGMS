@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   geolocator: ^5.1.5
+  bottom_navy_bar: ^5.2.2
   camera:
   path_provider:
   path:
