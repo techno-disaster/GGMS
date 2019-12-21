@@ -1,124 +1,95 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
-import 'package:path/path.dart' show join;
-import 'package:path_provider/path_provider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:ggms/screens/garbage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:dio/dio.dart';
 
 class TakePictureScreen extends StatefulWidget {
-  List<CameraDescription> cameras;
-  TakePictureScreen(this.cameras);
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  _TakePictureScreenState createState() => _TakePictureScreenState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
-  CameraController controller;
-  Future<void> _initializeControllerFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    // To display the current output from the Camera,
-    // create a CameraController.
-    controller = new CameraController(
-      // Get a specific camera from the list of available cameras.
-      widget.cameras[0], ResolutionPreset.high,
-      // Define the resolution to use.
-    );
-
-    // Next, initialize the controller. This returns a Future.
-    _initializeControllerFuture = controller.initialize();
-  }
-
-  @override
-  void dispose() {
-    // Dispose of the controller when the widget is disposed.
-    controller.dispose();
-    super.dispose();
-  }
-
-  void getLocation() async {
+class _TakePictureScreenState extends State<TakePictureScreen> {
+  File _image;
+  final GlobalKey<ScaffoldState> _scaffoldstate =
+      new GlobalKey<ScaffoldState>();
+  double lat;
+  double long;
+  Future getImage() async {
     Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position);
+    lat = position.latitude;
+    long = position.longitude;
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    _uploadFile(image);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  // Methode for file upload
+  void _uploadFile(filePath) async {
+    // Get base file name
+    String fileName = basename(filePath.path);
+    print("File base name: $fileName");
+
+    try {
+      FormData formData = new FormData.from({
+        "date": 24,
+        "time": "01:02",
+        "longitude": long,
+        "latitude": lat,
+        "dsc": selectedCompany1.name,
+        "weight": selectedBin1,
+        "img1": new UploadFileInfo(filePath, fileName)
+      });
+
+      Response response = await Dio()
+          .post("http://172.22.120.154:3000/grievance", data: formData);
+      print("File upload response: $response");
+
+      // Show the incoming message in snakbar
+      _showSnakBarMsg(response.data['message']);
+    } catch (e) {
+      print("Exception Caught: $e");
+    }
+  }
+
+  // Method for showing snak bar message
+  void _showSnakBarMsg(String msg) {
+    _scaffoldstate.currentState
+        .showSnackBar(new SnackBar(content: new Text(msg)));
   }
 
   @override
   Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(title: Text('Take a picture')),
-      // Wait until the controller is initialized before displaying the
-      // camera preview. Use a FutureBuilder to display a loading spinner
-      // until the controller has finished initializing.
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If the Future is complete, display the preview.
-            return CameraPreview(controller);
-          } else {
-            // Otherwise, display a loading indicator.
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+      key: _scaffoldstate,
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text("GFSS"),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: _image == null ? Text('No image selected.') : Image.file(_image),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
-        // Provide an onPressed callback.
-        onPressed: () async {
-          getLocation();
-          // Take the Picture in a try / catch block. If anything goes wrong,
-          // catch the error.
-          try {
-            // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
-
-            // Construct the path where the image should be saved using the
-            // pattern package.
-            final path = join(
-              // Store the picture in the temp directory.
-              // Find the temp directory using the `path_provider` plugin.
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-
-            // Attempt to take a picture and log where it's been saved.
-            await controller.takePicture(path);
-
-            // If the picture was taken, display it on a new screen.
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
-              ),
-            );
-          } catch (e) {
-            // If an error occurs, log the error to the console.
-            print(e);
-          }
-        },
-      ),
-    );
-  }
-}
-
-// A widget that displays the picture taken by the user.
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-
-  const DisplayPictureScreen({Key key, this.imagePath}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
+        onPressed: getImage,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

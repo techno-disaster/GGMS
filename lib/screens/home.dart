@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           children: <Widget>[
             GarbageScreen(widget.cameras),
-            TakePictureScreen(widget.cameras),
+            TakePictureScreen(),
           ],
         ),
       ),

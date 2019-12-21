@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ggms/screens/camera.dart';
 
 List<CameraDescription> cameras;
-
 class GarbageScreen extends StatefulWidget {
   var cameras;
   GarbageScreen(this.cameras);
@@ -37,25 +36,25 @@ class Bin {
   static List<Bin> getBins() {
     return <Bin>[
       Bin(1, 'Full'),
-      Bin(2, 'Normal'),
+      Bin(5, 'Normal'),
     ];
   }
 }
 
 List<Company> _companies = Company.getCompanies();
 List<DropdownMenuItem<Company>> _dropdownMenuItems;
-Company _selectedCompany;
+Company selectedCompany1;
 
-List<Bin> _bins = Bin.getBins();
-List<DropdownMenuItem<Bin>> _dropdownMenuBins;
-Bin _selectedBin;
+List<int> _bins = [1,5];
+List<DropdownMenuItem<int>> _dropdownMenuBins;
+int selectedBin1;
 
 class _GarbageScreenState extends State<GarbageScreen> {
   void initState() {
     _dropdownMenuItems = buildDropdownMenuItems(_companies);
-    _selectedCompany = _dropdownMenuItems[0].value;
+    selectedCompany1 = _dropdownMenuItems[0].value;
     _dropdownMenuBins = buildDropdownMenuBinItems(_bins);
-    _selectedBin = _dropdownMenuBins[0].value;
+    selectedBin1 = _dropdownMenuBins[0].value;
     super.initState();
   }
 
@@ -72,13 +71,13 @@ class _GarbageScreenState extends State<GarbageScreen> {
     return items;
   }
 
-  List<DropdownMenuItem<Bin>> buildDropdownMenuBinItems(List bins) {
-    List<DropdownMenuItem<Bin>> binitems = List();
-    for (Bin bin in bins) {
+  List<DropdownMenuItem<int>> buildDropdownMenuBinItems(List bins) {
+    List<DropdownMenuItem<int>> binitems = List();
+    for (int bin in bins) {
       binitems.add(
         DropdownMenuItem(
           value: bin,
-          child: Text(bin.name),
+          child: Text(bin==1?'abc':'bcd'),
         ),
       );
     }
@@ -87,13 +86,13 @@ class _GarbageScreenState extends State<GarbageScreen> {
 
   onChangeDropdownItem(Company selectedCompany) {
     setState(() {
-      _selectedCompany = selectedCompany;
+      selectedCompany1 = selectedCompany;
     });
   }
 
-  onChangeDropdownBinItem(Bin selectedBin) {
+  onChangeDropdownBinItem(int selectedBin) {
     setState(() {
-      _selectedBin = selectedBin;
+      selectedBin1 = selectedBin;
     });
   }
 
@@ -133,7 +132,7 @@ class _GarbageScreenState extends State<GarbageScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  TakePictureScreen(widget.cameras),
+                                  TakePictureScreen(),
                             ),
                           );
                         },
@@ -144,7 +143,7 @@ class _GarbageScreenState extends State<GarbageScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TakePictureScreen(widget.cameras),
+                        builder: (context) => TakePictureScreen(),
                       ),
                     );
                   },
@@ -166,14 +165,14 @@ class _GarbageScreenState extends State<GarbageScreen> {
                     height: 20.0,
                   ),
                   DropdownButton(
-                    value: _selectedCompany,
+                    value: selectedCompany1,
                     items: _dropdownMenuItems,
                     onChanged: onChangeDropdownItem,
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  Text('Selected: ${_selectedCompany.name}'),
+                  Text('Selected: ${selectedCompany1.name}'),
                 ],
               ),
             ),
@@ -192,14 +191,14 @@ class _GarbageScreenState extends State<GarbageScreen> {
                     height: 20.0,
                   ),
                   DropdownButton(
-                    value: _selectedBin,
+                    value: selectedBin1,
                     items: _dropdownMenuBins,
                     onChanged: onChangeDropdownBinItem,
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
-                  Text('Selected: ${_selectedBin.name}'),
+                  Text('Selected: ${selectedBin1}'),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
                     child: Container(
