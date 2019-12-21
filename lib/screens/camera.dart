@@ -15,8 +15,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   File _image;
   final GlobalKey<ScaffoldState> _scaffoldstate =
       new GlobalKey<ScaffoldState>();
-  double lat;
-  double long;
+double lat;
+double long;
   Future getImage() async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -39,7 +39,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
 
     try {
       FormData formData = new FormData.from({
-        "date": 24,
+        "date": DateTime.now(),
         "time": "01:02",
         "longitude": long,
         "latitude": lat,
@@ -48,8 +48,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         "img1": new UploadFileInfo(filePath, fileName)
       });
 
-      Response response = await Dio()
-          .post("http://172.22.120.154:3000/grievance", data: formData);
+      Response response =
+          await Dio().post("http://172.22.120.154:3000/grievance", data: formData);
       print("File upload response: $response");
 
       // Show the incoming message in snakbar

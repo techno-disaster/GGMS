@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ggms/screens/camera.dart';
 
 List<CameraDescription> cameras;
+
 class GarbageScreen extends StatefulWidget {
-  var cameras;
-  GarbageScreen(this.cameras);
   @override
   _GarbageScreenState createState() => _GarbageScreenState();
 }
@@ -45,7 +44,7 @@ List<Company> _companies = Company.getCompanies();
 List<DropdownMenuItem<Company>> _dropdownMenuItems;
 Company selectedCompany1;
 
-List<int> _bins = [1,5];
+List<int> _bins = [1, 5];
 List<DropdownMenuItem<int>> _dropdownMenuBins;
 int selectedBin1;
 
@@ -77,7 +76,7 @@ class _GarbageScreenState extends State<GarbageScreen> {
       binitems.add(
         DropdownMenuItem(
           value: bin,
-          child: Text(bin==1?'abc':'bcd'),
+          child: Text(bin == 1 ? 'abc' : 'bcd'),
         ),
       );
     }
@@ -98,133 +97,135 @@ class _GarbageScreenState extends State<GarbageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
-            child: Container(
-              child: ButtonTheme(
-                height: 70,
-                minWidth: double.infinity,
-                buttonColor: Colors.white,
-                child: RaisedButton(
-                  elevation:11.5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(18.0),
+    return Scaffold(
+      body: Container(
+        color: Colors.grey,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
+              child: Container(
+                child: ButtonTheme(
+                  height: 70,
+                  minWidth: double.infinity,
+                  buttonColor: Colors.white,
+                  child: RaisedButton(
+                    elevation: 11.5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(18.0),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "Upload Image",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 150,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.linked_camera),
+                          iconSize: 35,
+                          color: Colors.red,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TakePictureScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TakePictureScreen(),
+                        ),
+                      );
+                    },
                   ),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        "Upload Image",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 150,
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.linked_camera),
-                        iconSize: 35,
-                        color: Colors.red,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  TakePictureScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TakePictureScreen(),
-                      ),
-                    );
-                  },
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Select a company"),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  DropdownButton(
-                    value: selectedCompany1,
-                    items: _dropdownMenuItems,
-                    onChanged: onChangeDropdownItem,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text('Selected: ${selectedCompany1.name}'),
-                ],
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Select a company"),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    DropdownButton(
+                      value: selectedCompany1,
+                      items: _dropdownMenuItems,
+                      onChanged: onChangeDropdownItem,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text('Selected: ${selectedCompany1.name}'),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Select a type of bin"),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  DropdownButton(
-                    value: selectedBin1,
-                    items: _dropdownMenuBins,
-                    onChanged: onChangeDropdownBinItem,
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text('Selected: ${selectedBin1}'),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
-                    child: Container(
-                      child: ButtonTheme(
-                        height: 70,
-                        minWidth: double.infinity,
-                        buttonColor: Colors.white,
-                        child: RaisedButton(
-                          elevation: 11.5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(18.0),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            "Submit Grievance",
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+            SizedBox(
+              height: 50,
+            ),
+            Container(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Select a type of bin"),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    DropdownButton(
+                      value: selectedBin1,
+                      items: _dropdownMenuBins,
+                      onChanged: onChangeDropdownBinItem,
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text('Selected: $selectedBin1'),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
+                      child: Container(
+                        child: ButtonTheme(
+                          height: 70,
+                          minWidth: double.infinity,
+                          buttonColor: Colors.white,
+                          child: RaisedButton(
+                            elevation: 11.5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(18.0),
+                            ),
+                            onPressed: null,
+                            child: Text(
+                              "Submit Grievance",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

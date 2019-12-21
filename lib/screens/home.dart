@@ -7,9 +7,6 @@ import 'package:ggms/screens/garbage.dart';
 List<CameraDescription> cameras;
 
 class HomeScreen extends StatefulWidget {
-  var cameras;
-  HomeScreen(this.cameras);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -49,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() => _currentIndex = index);
           },
           children: <Widget>[
-            GarbageScreen(widget.cameras),
+            GarbageScreen(),
             TakePictureScreen(),
           ],
         ),
