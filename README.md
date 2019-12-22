@@ -17,7 +17,7 @@ This project is made to be a multiplatform user-friendly app to report grievance
 - Keras using Tensor Flow as backend : Used for the classification of grievances
 - Matplotlib : Data Analysis for visualization and simple understanding of the data
 - Flutter : Flutter has been used to develop a simple easy to use android app and IOS app for the users
-
+- Node.js : backend
 ## Getting Started
 
 bla blu bla blu bla
