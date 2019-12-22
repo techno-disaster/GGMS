@@ -18,9 +18,8 @@ This project is made to be a multiplatform user-friendly app to report grievance
 - Matplotlib : Data Analysis for visualization and simple understanding of the data
 - Flutter : Flutter has been used to develop a simple easy to use android app and IOS app for the users
 - Node.js : backend
-## Getting Started
 
-bla blu bla blu bla
-
+## Usage
+1. Download 
 ## Demo VIdeo
 Submitted at Devfolio
