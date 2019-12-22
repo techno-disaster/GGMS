@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 // import 'package:ggms/screens/home.dart';
 // import 'package:ggms/screens/login.dart';
 import 'package:flutter/services.dart';
-import 'package:ggms/screens/admin/admin1.dart';
-import 'package:ggms/screens/home.dart';
+// import 'package:ggms/screens/admin/admin1.dart';
+// import 'package:ggms/screens/home.dart';
 import 'package:ggms/screens/onboarding.dart';
 
 List<CameraDescription> cameras;
