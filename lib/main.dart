@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+// import 'package:ggms/screens/home.dart';
+// import 'package:ggms/screens/login.dart';
+import 'package:flutter/services.dart';
 import 'package:ggms/screens/admin/admin1.dart';
-
-import './screens/login.dart';
+import 'package:ggms/screens/home.dart';
+import 'package:ggms/screens/onboarding.dart';
 
 List<CameraDescription> cameras;
 Future<Null> main() async {
@@ -14,11 +17,12 @@ Future<Null> main() async {
   cameras = await availableCameras();
 
   // Get a specific camera from the list of available cameras.
-
+  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: AdminPage(),
+      home:OnboardingScreen(),
     ),
   );
 }

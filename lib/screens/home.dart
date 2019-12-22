@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:ggms/screens/camera.dart';
 import 'package:ggms/screens/garbage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 List<CameraDescription> cameras;
 
@@ -31,11 +32,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         elevation: 0,
         title: Text(
           "GGMS",
-          style: TextStyle(color: Colors.black),
+          style: GoogleFonts.roboto(
+            textStyle: TextStyle(color: Colors.white),
+          ),
         ),
         centerTitle: true,
       ),
@@ -61,13 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavyBarItem(
             title: Text('Submit'),
             icon: Icon(Icons.apps),
-            activeColor: Colors.purpleAccent,
+            activeColor: Colors.amber,
             inactiveColor: Colors.grey,
           ),
           BottomNavyBarItem(
             title: Text('Camera'),
             icon: Icon(Icons.photo_camera),
-            activeColor: Colors.red,
+            activeColor: Colors.amber,
             inactiveColor: Colors.grey,
           ),
         ],

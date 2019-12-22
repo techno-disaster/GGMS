@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:ggms/screens/camera.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 List<CameraDescription> cameras;
 
@@ -17,11 +18,11 @@ class Company {
 
   static List<Company> getCompanies() {
     return <Company>[
-      Company(1, 'Apple'),
-      Company(2, 'Google'),
-      Company(3, 'Samsung'),
-      Company(4, 'Sony'),
-      Company(5, 'LG'),
+      Company(1, 'tag1'),
+      Company(2, 'tag2'),
+      Company(3, 'tag3'),
+      Company(4, 'tag4'),
+      Company(5, 'tag5'),
     ];
   }
 }
@@ -98,133 +99,151 @@ class _GarbageScreenState extends State<GarbageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
-        color: Colors.grey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
-              child: Container(
-                child: ButtonTheme(
-                  height: 70,
-                  minWidth: double.infinity,
-                  buttonColor: Colors.white,
-                  child: RaisedButton(
-                    elevation: 11.5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(18.0),
-                    ),
+        color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+          child: Column(
+            children: <Widget>[
+              Image.asset('assets/images/onboarding2.png', height: 250, width: 250,),
+              SizedBox(height: 60,),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(18.0),
+                  ),
+                  color: Color.fromRGBO(35, 37, 40, 1),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                     child: Row(
                       children: <Widget>[
-                        Text(
-                          "Upload Image",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        SizedBox(
-                          width: 150,
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.linked_camera),
-                          iconSize: 35,
-                          color: Colors.red,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TakePictureScreen(),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TakePictureScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Select a company"),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    DropdownButton(
-                      value: selectedCompany1,
-                      items: _dropdownMenuItems,
-                      onChanged: onChangeDropdownItem,
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text('Selected: ${selectedCompany1.name}'),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Select a type of bin"),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    DropdownButton(
-                      value: selectedBin1,
-                      items: _dropdownMenuBins,
-                      onChanged: onChangeDropdownBinItem,
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Text('Selected: $selectedBin1'),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
-                      child: Container(
-                        child: ButtonTheme(
-                          height: 70,
-                          minWidth: double.infinity,
-                          buttonColor: Colors.white,
-                          child: RaisedButton(
-                            elevation: 11.5,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(18.0),
-                            ),
-                            onPressed: null,
-                            child: Text(
-                              "Submit Grievance",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
+                        Container(
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Select a company",
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                DropdownButton(
+                                  value: selectedCompany1,
+                                  items: _dropdownMenuItems,
+                                  onChanged: onChangeDropdownItem,
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  'Selected: ${selectedCompany1.name}',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        Container(
+                          child: Center(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                "Select a type of bin",
+                                style: GoogleFonts.roboto(
+                                  textStyle: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              DropdownButton(
+                                value: selectedBin1,
+                                items: _dropdownMenuBins,
+                                onChanged: onChangeDropdownBinItem,
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                'Selected: $selectedBin1',
+                                style: GoogleFonts.roboto(
+                                  textStyle: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
+                child: Container(
+                  child: ButtonTheme(
+                    height: 90,
+                    minWidth: double.infinity,
+                    buttonColor: Color.fromRGBO(35, 37, 40, 1),
+                    child: RaisedButton(
+                      elevation: 11.5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            "Upload Image and \nupload submit",
+                            style: GoogleFonts.roboto(
+                              textStyle: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 120,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.linked_camera),
+                            iconSize: 35,
+                            color: Colors.white,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TakePictureScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TakePictureScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
