@@ -1,16 +1,26 @@
-# ggms
+# GGMS
 
-A new Flutter project.
+Team Name :- DEJAVU
+
+    Aniket Bohosoe
+    Tirth Shah
+    Jayesh Nirve
+    Parth Shah
+
+<em><b>An AI based Grievance clasification and reporting solution with supported Data Analysis.</b></em>
+
+<b>Overview</b>
+
+This project is made to be a multiplatform user-friendly app to report grievances in a locality. The user posts an image of the grievances,and the grievance gets reported to the concerning authorities. The authorities are also provideed with the visualization the grievances in the form of histograms and heatmaps for efficient resource allocation. This solution made will help in achieving smooth hassle-free communication between the locals and the civic authorities.
+
+<b>Technologies Used</b>
+- Keras using Tensor Flow as backend : Used for the classification of grievances
+- Matplotlib : Data Analysis for visualization and simple understanding of the data
+- Flutter : Flutter has been used to develop a simple easy to use android app and IOS app for the users
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+bla blu bla blu bla
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Demo VIdeo
+Submitted at Devfolio
