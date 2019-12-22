@@ -18,11 +18,11 @@ class Company {
 
   static List<Company> getCompanies() {
     return <Company>[
-      Company(1, 'tag1'),
-      Company(2, 'tag2'),
-      Company(3, 'tag3'),
-      Company(4, 'tag4'),
-      Company(5, 'tag5'),
+      Company(1, 'garbage'),
+      Company(2, 'leakage'),
+      Company(3, 'pothole'),
+      Company(4, 'onPlayground'),
+      
     ];
   }
 }
