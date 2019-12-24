@@ -241,6 +241,12 @@ class _AdminPageState extends State<AdminPage> {
                     print(b);
                     print(c);
                     print(d);
+                    Navigator.pushReplacement(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => FinalScreen(a: a, b: b, c: c, d: d),
+                      ),
+                    );
                   },
                 ),
               ),
