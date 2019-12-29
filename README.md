@@ -2,7 +2,7 @@
 
 Team Name :- DEJAVU
 
-    Aniket Bohosoe
+    Aniket Bhosale
     Tirth Shah
     Jayesh Nirve
     Parth Shah
